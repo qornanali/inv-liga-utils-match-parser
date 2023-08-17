@@ -1,0 +1,2 @@
+OPENDOTA_BASE_URL: http://localhost:8888
+PLAYER_STAT_REPORT_PATH: "/tmp/"

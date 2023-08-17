@@ -1,0 +1,2 @@
+OPENDOTA_BASE_URL: https://api.opendota.com/
+PLAYER_STAT_REPORT_PATH: "/tmp"
