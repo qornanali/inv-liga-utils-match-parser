@@ -1,11 +1,8 @@
 name: generate-report
+run-name: ${{ github.actor }} is generating the report 🚀
 on: workflow_dispatch
 jobs:
-  report:
-    env:
-      APP_ENVIRONMENT: production
-      OPENDOTA_BASE_URL: https://api.opendota.com
-      PLAYER_STAT_REPORT_PATH: /tmp/
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -19,6 +16,18 @@ jobs:
       - name: Build the project
         run: |
           ./gradlew clean build
+  report:
+    needs: build
+    env:
+      APP_ENVIRONMENT: production
+      OPENDOTA_BASE_URL: https://api.opendota.com
+      PLAYER_STAT_REPORT_PATH: /tmp/
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
       - name: Generate player stat report
         run: |
           java -jar app/build/libs/app-all.jar
@@ -27,4 +36,3 @@ jobs:
         with:
           name: player-stat-report
           path: /tmp/player_stat.csv
-      - run: echo "🍏 This job's status is ${{ job.status }}."
