@@ -1,6 +1,10 @@
 name: generate-report
 run-name: ${{ github.actor }} is generating the report 🚀
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      match_id:
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,7 +34,7 @@ jobs:
           java-version: 11
       - name: Generate player stat report
         run: |
-          java -jar app/build/libs/app-all.jar
+          java -jar app/build/libs/app-all.jar ${{ github.event.inputs.match_id }}
       - name: Archive player stat
         uses: actions/upload-artifact@v3
         with:
