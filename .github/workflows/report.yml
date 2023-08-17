@@ -2,7 +2,6 @@ name: generate-report
 on: workflow_dispatch
 jobs:
   report:
-    needs: build
     env:
       APP_ENVIRONMENT: production
       OPENDOTA_BASE_URL: https://api.opendota.com
