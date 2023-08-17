@@ -46,7 +46,7 @@ jobs:
           java -jar app-all.jar ${{ github.event.inputs.match_id }}
       - name: Rename the report file
         run: |
-          cp -i /tmp/player_stat.csv /tmp/player_stat_${{ github.event.inputs.match_id }}.csv
+          cp -i /tmp/playerstat.csv /tmp/playerstat_${{ github.event.inputs.match_id }}.csv
       - name: Archive player stat
         uses: actions/upload-artifact@v3
         with:
