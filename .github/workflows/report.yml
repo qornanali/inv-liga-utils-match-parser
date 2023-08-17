@@ -51,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: player-stat-report
-          path: /tmp/player_stat_${{ github.event.inputs.match_id }}.csv
+          path: /tmp/playerstat_${{ github.event.inputs.match_id }}.csv
