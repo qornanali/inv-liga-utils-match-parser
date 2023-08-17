@@ -1,5 +1,7 @@
 # Match Parser for Invicible Dota 2 Lobay
 
+[![build](https://github.com/qornanali/inv-liga-utils-match-parser/actions/workflows/build.yml/badge.svg)](https://github.com/qornanali/inv-liga-utils-match-parser/actions/workflows/build.yml)
+
 It takes match-id as argument and write out a CSV!
 
 To register more users, add them to [db_player.json](app/src/main/resources/db_player.json)
