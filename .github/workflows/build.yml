@@ -1,8 +1,7 @@
-name: build
-run-name: ${{ github.actor }} is building the project!
-on: [push]
+name: generate-report
 jobs:
   build:
+    on: [push]
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -22,4 +21,22 @@ jobs:
       - name: Build the project
         run: |
           ./gradlew clean build
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+  report:
+    needs: build
+    on: workflow_dispatch
+    env:
+      APP_ENVIRONMENT: production
+      OPENDOTA_BASE_URL: https://api.opendota.com
+      PLAYER_STAT_REPORT_PATH: /tmp/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate player stat report
+        run: |
+          java -jar app/build/libs/app-all.jar
+      - name: Archive player stat
+        uses: actions/upload-artifact@v3
+        with:
+          name: player-stat-report
+          path: /tmp/player_stat.csv
       - run: echo "🍏 This job's status is ${{ job.status }}."
