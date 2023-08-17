@@ -86,17 +86,18 @@ public class MatchParserIntegrationTest {
         assertDoesNotThrow(() -> App.main(new String[]{"foobar"}));
 
         File reportFile = new File("/tmp/playerstat.csv");
-        String report = IOUtils.toString(Objects.requireNonNull(reportFile.toURI()), Charset.defaultCharset());
-        assertEquals("Date,PLAYER NAME,GAME STATUS,Kill,Death,Assist\n" +
-                "12/08/2023,Bima,L,6,7,35\n" +
-                "12/08/2023,Agung,L,5,3,28\n" +
-                "12/08/2023,Ali,L,14,7,21\n" +
-                "12/08/2023,Opik,L,9,8,43\n" +
-                "12/08/2023,Danu,L,25,4,16\n" +
-                "12/08/2023,Kafin,L,3,17,15\n" +
-                "12/08/2023,Fauzi,L,10,6,6\n" +
-                "12/08/2023,Nidy,L,9,14,8\n" +
-                "12/08/2023,Kemal,L,3,9,16\n" +
-                "12/08/2023,rezca,L,3,15,17\n", report);
+        String actualReport = IOUtils.toString(Objects.requireNonNull(reportFile.toURI()), Charset.defaultCharset());
+        String expectedReport = "Date,GAME NUM,PLAYER NAME,GAME STATUS,Kill,Death,Assist,Role,Hero,Match ID\n" +
+                "12/08/2023,,Bima,L,6,7,35,Carry,Spirit Breaker,7281893156\n" +
+                "12/08/2023,,Agung,L,5,3,28,Carry,Brewmaster,7281893156\n" +
+                "12/08/2023,,Ali,L,14,7,21,Carry,Faceless Void,7281893156\n" +
+                "12/08/2023,,Opik,L,9,8,43,Support,Vengeful Spirit,7281893156\n" +
+                "12/08/2023,,Danu,L,25,4,16,Carry,Sniper,7281893156\n" +
+                "12/08/2023,,Kafin,L,3,17,15,Support,Primal Beast,7281893156\n" +
+                "12/08/2023,,Fauzi,L,10,6,6,Carry,Anti-Mage,7281893156\n" +
+                "12/08/2023,,Nidy,L,9,14,8,Support,Dark Willow,7281893156\n" +
+                "12/08/2023,,Kemal,L,3,9,16,Support,Warlock,7281893156\n" +
+                "12/08/2023,,rezca,L,3,15,17,Support,Tusk,7281893156\n";
+        assertEquals(expectedReport, actualReport);
     }
 }

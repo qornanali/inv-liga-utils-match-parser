@@ -41,22 +41,30 @@ public class PlayerStatReportGenerator {
         String gameStatus = playerStat.isWinner() ? "W" : "L";
         return new String[]{
                 dateTimeFormatter.format(timeAtWib),
+                "",
                 playerStat.getName(),
                 gameStatus,
                 String.valueOf(playerStat.getKills()),
                 String.valueOf(playerStat.getDeaths()),
-                String.valueOf(playerStat.getAssists())
+                String.valueOf(playerStat.getAssists()),
+                playerStat.getRole(),
+                playerStat.getHeroName(),
+                playerStat.getMatchId()
         };
     }
 
     private String[] getHeader() {
         return new String[]{
                 "Date",
+                "GAME NUM",
                 "PLAYER NAME",
                 "GAME STATUS",
                 "Kill",
                 "Death",
-                "Assist"
+                "Assist",
+                "Role",
+                "Hero",
+                "Match ID"
         };
     }
 

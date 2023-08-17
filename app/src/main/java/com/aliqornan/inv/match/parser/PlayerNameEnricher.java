@@ -16,7 +16,6 @@ public class PlayerNameEnricher {
 
     private static final String FILE_CONFIG_URL = "/db_player.json";
     private final List<PlayerConfig> playerConfigs;
-    private Gson gson;
 
     public PlayerNameEnricher(Gson gson) throws IOException {
         this.playerConfigs = loadConfig(gson);

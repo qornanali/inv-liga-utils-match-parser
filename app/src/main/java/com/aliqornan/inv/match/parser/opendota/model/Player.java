@@ -7,6 +7,7 @@ import java.time.OffsetDateTime;
 @Value
 public class Player {
 
+    String matchId;
     String accountId;
     String personaName;
     int kills;
@@ -14,5 +15,6 @@ public class Player {
     int assists;
     boolean radiantWin;
     boolean isRadiant;
+    int heroId;
     OffsetDateTime startTime;
 }

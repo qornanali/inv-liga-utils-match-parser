@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +22,8 @@ public class App {
             OpenDotaClient openDotaClient = OpenDotaClientFactory.create(configuration);
             CsvGenerator csvGenerator = new CsvGenerator();
             PlayerNameEnricher playerNameEnricher = new PlayerNameEnricher(gson);
-            MatchParser matchParser = new MatchParser(openDotaClient, playerNameEnricher);
+            ChosenHeroEnricher chosenHeroEnricher = new ChosenHeroEnricher(gson);
+            MatchParser matchParser = new MatchParser(openDotaClient, playerNameEnricher, chosenHeroEnricher);
             PlayerStatReportGenerator playerStatReportGenerator = new PlayerStatReportGenerator(csvGenerator, configuration);
 
             /* SAMPLE: 7281893156 */

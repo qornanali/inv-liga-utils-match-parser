@@ -20,6 +20,7 @@ public class MatchParser {
 
     private final OpenDotaClient openDotaClient;
     private final PlayerNameEnricher playerNameEnricher;
+    private final ChosenHeroEnricher chosenHeroEnricher;
 
     public List<PlayerStat> parsePlayerStats(String matchId)
             throws IOException, UpstreamFailedException {
@@ -43,6 +44,7 @@ public class MatchParser {
                 .stream()
                 .map(PlayerStat::createFrom)
                 .map(playerNameEnricher::enrichPlayerStat)
+                .map(chosenHeroEnricher::enrichPlayerStat)
                 .collect(Collectors.toList());
     }
 }
