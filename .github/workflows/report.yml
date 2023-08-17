@@ -20,6 +20,11 @@ jobs:
       - name: Build the project
         run: |
           ./gradlew clean build
+      - name: Store build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: manual-build-jar
+          path: app/build/libs/app-all.jar
   report:
     needs: build
     env:
@@ -28,13 +33,17 @@ jobs:
       PLAYER_STAT_REPORT_PATH: /tmp/
     runs-on: ubuntu-latest
     steps:
+      - name: Download build result from job build
+        uses: actions/download-artifact@v3
+        with:
+          name: manual-build-jar
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 11
       - name: Generate player stat report
         run: |
-          java -jar app/build/libs/app-all.jar ${{ github.event.inputs.match_id }}
+          java -jar app-all.jar ${{ github.event.inputs.match_id }}
       - name: Rename the report file
         run: |
           cp -i /tmp/player_stat.csv /tmp/player_stat_${{ github.event.inputs.match_id }}.csv
