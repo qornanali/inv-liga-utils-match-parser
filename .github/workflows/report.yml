@@ -1,7 +1,12 @@
 name: generate-report
-on: [push]
+on: workflow_dispatch
 jobs:
-  build:
+  report:
+    needs: build
+    env:
+      APP_ENVIRONMENT: production
+      OPENDOTA_BASE_URL: https://api.opendota.com
+      PLAYER_STAT_REPORT_PATH: /tmp/
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -21,3 +26,12 @@ jobs:
       - name: Build the project
         run: |
           ./gradlew clean build
+      - name: Generate player stat report
+        run: |
+          java -jar app/build/libs/app-all.jar
+      - name: Archive player stat
+        uses: actions/upload-artifact@v3
+        with:
+          name: player-stat-report
+          path: /tmp/player_stat.csv
+      - run: echo "🍏 This job's status is ${{ job.status }}."
